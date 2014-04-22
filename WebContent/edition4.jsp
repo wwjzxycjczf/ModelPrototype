@@ -75,6 +75,19 @@ stroke: #000 !important;
 <input type='button'  value='取消' onclick="QuitDocRule()"/> 
 </form>
 </div>
+<div id="chatbox" class="chat" style="display:none">
+        <div id='Chatlog' class='Chatcontainer'></div>
+        <br />
+        <div id='SendDataContainer' class="Senddatacontainer">
+        <input type="text" id="DataToSend" size="63" />
+        <br />
+       
+        <button id='SendData' type="button" style="margin-top:4px;margin-left:300px;" onclick='SendDataClicked();'>发送</button>
+        <button id='closebox' type="button" style="margin-top:4px;margin-left:20px;" onclick='CloseDataClicked();'>关闭</button>
+        </div>
+       
+       
+</div>
      <div id="mainframe">
      <div>
     <form id="form1">  
@@ -106,12 +119,16 @@ stroke: #000 !important;
 		</div>
     </div>
     <div>
-	    <div style="width:600px;height:50px;position:absolute;border: 1px solid #eee;margin-left:0px;left:280px;top:0px;overflow:auto;border:1px">
+	    <div style="width:1100px;height:50px;position:absolute;border: 1px solid #eee;margin-left:0px;left:280px;top:0px;overflow:auto;border:1px">
 	    <label class="Search" id="nametip">Knowledge keywords:</label>
 	        <input type="text" id="knowledgeid" value="" class="Searchknowledge"  />
 	    <input type="submit" name="Submit" value="Search"  style="position:absolute;top:0px;left:300px;" onclick="SearchKnowledge();"  />
 	 <input type="submit" name="Submit" id="back" value="Back"  style="position:absolute;top:0px;left:400px;display:none;" onclick="BackMainKnowledge();"  />
-	 <input type="submit" name="Submit" value="login out"  style="position:absolute;top:0px;left:600px;" onclick="loginout();"  />
+	 
+	<div id="loginstate" style="font-family:微软雅黑; font-size:14px;top:0px;left:600px;display:none;position:absolute;width:100px;"></div>
+	
+	 <input type="submit" name="Submit" value="login out"  style="position:absolute;top:0px;left:800px;" onclick="loginout();"  />
+	 <input type="submit" name="Submit" value="发起聊天"  style="position:absolute;top:0px;left:1000px;" onclick="chat();"  />
 	    </div>
 	   	    
 	  <!--   <div id="math" style=" width:600px;height:600px;position:absolute;border: 1px solid #eee;margin-left:310px;top:40px;overflow:auto;display:none;"></div>
@@ -158,15 +175,11 @@ stroke: #000 !important;
 		 </div>
     </div>
 </div>
-<div id="loginstate" style="filter:alpha(opacity=100);color:#FFF;font-family:微软雅黑; border:1px solid #eee;font-size:14px;z-index:9999;top:80px;left:800px;display:block;position:absolute;width:400px;"></div>
 <div class="bodyerTab2">
   	<div class="bodyerTab1_1">
 	   	<div class="news mb10">
 	   	<h3 class="title mb10">User List </h3>
         		<div id="userlist" style="width:240px;background:#F4F1F0;height:200px;font-family:微软雅黑; font-size:14px;margin:0 0;overflow:auto;">
-				
-            
-       
 				</div>
     	    
 		</div>
@@ -177,9 +190,8 @@ stroke: #000 !important;
             	
          </div>
 	</div>    
-			
-		
     </div>
+
 </div> 
 
 <!-- <div id="content" style="width:600px;height:200px;position:absolute;border: 1px solid #eee;left:310px;margin-left:0px;top:600px;overflow:auto;"></div>
@@ -197,6 +209,8 @@ stroke: #000 !important;
 	   %>
 	   username = "<%=userName %>";
 	   var loginstate = document.getElementById("loginstate");
+	   loginstate.style.display = "block";
+	//   loginstate.value = "<%=userName %>"+"登陆成功！";
 	   loginstate.innerHTML = "<%=userName %>"+"登陆成功！";
 	   <%
 	   }

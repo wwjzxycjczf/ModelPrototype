@@ -236,7 +236,12 @@ function WSonMessage(event) {
     	Log(data.name+" logout","OK");
     	return;
     }
-    
+    if(type=="chat"){
+    	document.getElementById("Chatlog").innerHTML = document.getElementById("Chatlog").innerHTML + data.info + "<br />";
+        var Chatlog = document.getElementById("Chatlog");
+        Chatlog.scrollTop = Chatlog.scrollHeight;
+    	return;
+    }
     if (type == "relationlist") {
         LoadDatas(data,1);
         return;
@@ -1539,3 +1544,29 @@ function loginout(){
 	ws.close();
 	window.location.href = "login.jsp";
 }
+function chat(){
+	document.getElementById("chatbox").style.zIndex = 9999; 
+	document.getElementById("chatbox").style.display = "block";
+	
+}
+function SendDataClicked(){
+	if(document.getElementById("DataToSend").value.trim()==""){
+		alert("输入不能为空");
+	}else{
+		Send(username+"说:"+document.getElementById("DataToSend").value);
+		document.getElementById("DataToSend").value ="";
+	}
+}
+function CloseDataClicked(){
+	document.getElementById("DataToSend").value ="";
+	document.getElementById("chatbox").style.display ="none";
+}
+$(document).ready(  
+        function() {  
+            $("#chatbox").keydown(function(event) {  
+            	if (event.keyCode == 13) {
+            		SendDataClicked();
+            	}
+            });
+        }  
+    );

@@ -45,12 +45,15 @@ private ChannelGroup channelgroup = null;	//组播组
 
 	private HashMap<String,String> userChannel;
 	private Object[] channelarrayorigin;
+	private final String userchatlistfilename = "userchatlist.txt";
+	private ArrayList<String> userchat;
 //	private List<String> usernames;
 //	private int usernum=0;
 	public UserList(WebSocketTextField websockettextfield){
 		channelgroup = new DefaultChannelGroup();
 		this.websockettextfield = websockettextfield;
 		userChannel = new HashMap<String,String>();
+		userchat = new ArrayList<String>(50);
 //		usernames = new ArrayList<String>();
 //		usernames = new String[10];
 	}
@@ -58,6 +61,57 @@ private ChannelGroup channelgroup = null;	//组播组
 	public synchronized void addUser(Channel channel) {
 		channelgroup.add(channel);
 		websockettextfield.setTxt_websocketnumber(String.valueOf(channelgroup.size()));
+	}
+	
+	/**向userchat中添加用户交谈信息，如果交谈信息>=50条则存到文件userchatlist.txt中
+	 * 
+	 */
+	public synchronized void saveChatinfo(String chatinfo) throws FileNotFoundException, Exception {
+		System.out.println("savechatinfo:");
+		String chatinfomation = "{\"type\":\"chat\",\n"+"\"info\":\""+chatinfo+"\"}";
+		channelgroup.write(new TextWebSocketFrame(chatinfomation));
+		if(userchat.size()>=50){
+			FileWriter filewriter = null;
+			PrintWriter out = null;
+			
+			try {
+				filewriter = new FileWriter(userchatlistfilename,true);// 创建输出流
+				out = new PrintWriter(filewriter);
+				StringBuffer buffer = new StringBuffer("");
+				
+				for (int i = 0; i < userchat.size(); ++i) {
+					buffer = buffer.append(userchat.get(i));
+					buffer = buffer.append("\r\n");
+				}
+				out.print(buffer.toString());
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+//				JOptionPane.showMessageDialog(null, "Userlist文件写入错误");
+				System.err.println("userchatlist文件写入错误");
+			} finally
+			{
+				if (out != null) {
+					out.close();
+					out = null;
+				}
+				if (filewriter != null) {
+					try {
+						filewriter.close();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					filewriter = null;
+				}
+			}
+		
+			userchat = new ArrayList<String>(50);
+			
+			
+		}
+		userchat.add(chatinfo);	
 	}
 	/** 向列表中的用户转发Json格式的Concept信息 
 	 * @throws Exception 

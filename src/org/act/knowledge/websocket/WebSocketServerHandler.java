@@ -127,6 +127,9 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
 				// 发送站点列表
 				((DataPublisherFactory) datapublisherfactory).sendUserlist(ctx,request.substring(0,request.indexOf(":")),request.substring(request.indexOf(":")+1));
 			}
+			if(request.indexOf("说:")>=0){
+				((DataPublisherFactory) datapublisherfactory).saveChatinfo(ctx,request);
+			}
 			if(request.indexOf("highlevelreqStr")>=0){
 				String[] strarr = request.split(":");
 				((DataPublisherFactory) datapublisherfactory).AddHighlevelreq(ctx,strarr[1]);

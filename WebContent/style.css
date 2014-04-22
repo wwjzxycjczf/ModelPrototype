@@ -329,3 +329,31 @@ input{border:1px solid green;}
 	border: 1px solid #eee;
 	-webkit-border-radius: 6px;
 }
+
+.chat{
+    background: url(images/bkg.png);
+    width:431px;
+    height:372px;
+	left :400px;
+	top: 200px;
+	text-align:center;
+	font-family: "Courier New";
+	position:absolute;
+    display:none;
+}
+.Chatcontainer
+     {
+        
+         font-family: "Courier New";
+         width: 400px;
+         height: 300px;
+         overflow:auto;
+         text-align:left;
+         border: 1px solid black;
+       
+     }
+.Senddatacontainer
+{
+ left:0px;
+position:absolute;
+}

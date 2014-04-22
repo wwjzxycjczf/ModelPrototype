@@ -328,6 +328,10 @@ public class DataPublisherFactory {
 			websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
 		}
 	}
+	public void saveChatinfo(ChannelHandlerContext ctx,String info) throws FileNotFoundException, Exception{
+		userlist.saveChatinfo(info);
+		websockettextfield.setTxt_websocket(info+"\r\n\r\n");
+	}
 	/** 增加WebSocket用户 */
 	public void addWebSocketUser(Channel channel)
 	{
