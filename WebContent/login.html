@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>  
+<META HTTP-EQUIV= "pragma " CONTENT= "no-cache "> 
+<META HTTP-EQUIV= "Cache-Control " CONTENT= "no-cache, must-revalidate "> 
+<META HTTP-EQUIV= "expires " CONTENT= "Wed, 26 Feb 1997 08:21:57 GMT "> 
+<META http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>   
+    </title>
+    
+<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="layout.css" />
+
+<style>
+
+
+#chart {
+    height: 500px;
+  }
+ 
+  .node rect {
+    cursor: move;
+    fill-opacity: .9;
+    shape-rendering: crispEdges;
+  }
+ .node circle {
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+.node.reflexive.circle{
+stroke: #000 !important;
+  stroke-width: 2.5px;
+  fill:red;
+}
+  .node text {
+    pointer-events: none;
+    text-shadow: 0 1px 0 #fff;
+  }
+ 
+  .link {
+    fill: none;
+    stroke: #000;
+   stroke-opacity: .5;
+    fill-opacity: .2;
+  }
+ 
+  .link:hover {
+    fill-opacity: .5;
+  }
+</style>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+ <script src="http://d3js.org/d3.v2.js"></script> 
+   <!--<script src="d3.js"></script>
+    <script src="d3.geom.js"></script> 
+      <script src="d3.layout.js"></script>  --> 
+      <script src="sankey.js"></script>
+<script type="text/javascript"  src="drawsvgnew2.js"></script>
+<script type="text/javascript"  src="drawsvgnew3.js"></script>
+<!--<script src="d3.js"></script>-->
+
+
+
+  
+</head>  
+<body>
+<div id="login" style="background: url(images/loginbkg.png);left:400px;top:200px;position:absolute;border:1px solid black;width:512px;height:398px;display:block">
+    <form id="form1" style="text-align:center;font-family:Courier New">
+        <h1>登  录 </h1>
+        <br />
+  用户名： <input type="text" id="txtName"  />
+      <p id="t_name"></p>
+       <br />
+        密码：         <input type="password" id="pwd" /><p id="t_pass"></p>
+        <br />
+        <button id='loginbutton' type="button" onclick='loginClicked();'>登录</button>
+        <br />
+         <div id='tips' ></div>
+        </form>
+     </div>
+     
+<!-- <div id="content" style="width:600px;height:200px;position:absolute;border: 1px solid #eee;left:310px;margin-left:0px;top:600px;overflow:auto;"></div>
+-->
+<script type="text/javascript"  src=""></script> 
+  <script type="text/javascript"  src="model.js"></script> 
+   <script type="text/javascript">
+   
+ 
+    </script>
+</body>  
+</html>  
