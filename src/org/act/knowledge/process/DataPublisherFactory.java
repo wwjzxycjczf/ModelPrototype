@@ -28,7 +28,6 @@ public class DataPublisherFactory {
 	private RelationsList relationlist = null;// 知识关系列表
 	private RuleList rulelist = null;// 规则列表
 	private HighLevelReq highlevelreq = new HighLevelReq();// 高层需求
-//	private GraphJson graphjson = null;
 	private WebSocketTextField websockettextfield= null;	// WebSocket状态栏
 	
 	private LogList loglist = null;//消息列表

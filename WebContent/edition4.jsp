@@ -220,12 +220,10 @@ stroke: #000 !important;
 	   	String filename = (String) session.getAttribute("filename");
 	   if(mathml!=null&&filename!=null){
 	   %>
-	   //document.getElementById("mainframe").style.display="block";
 
 	   <%
 	   }
 	   %>
-	   //document.getElementById("math").innerHTML = "ok";
 	   ConceptList = stringToJson(ConceptList);
 	   RelationList = stringToJson(RelationList);
 	   RuleList = stringToJson(RuleList);

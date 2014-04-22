@@ -98,13 +98,6 @@ function readsvgrequirementfolder(evt){//获取需求的文件夹
 	  	        for(var j=0;j<Interface[0].childNodes.length;j++){
 	  	        	if(Interface[0].childNodes[j].nodeName=="Device"){
 	  	        		if(Interface[0].childNodes[j].attributes[2].value=="Input"){
-//	  	        			var obj1="{}";
-//	  	        			obj1 = stringToJson(obj);
-////	  	        			obj1.id = id;
-//	  	        			obj1.name = name;
-//	  	        			obj1.num = 0;
-//	  	        			inputs.push(id+"."+name);
-//	  	        			inputnum[id+"."+name] = 0;
 	  	        			var safety={};
 	  	        			for(var k=0;k<safetyrelated[0].childNodes.length;k++){
 	  	        				if(safetyrelated[0].childNodes[k].nodeName=="Redundancy"){
@@ -131,12 +124,6 @@ function readsvgrequirementfolder(evt){//获取需求的文件夹
 //	  	        			knowledgedrawRect(0,30*(readnum-1),300,30,id,name);
 	  	        		}
 	  	        		if(Interface[0].childNodes[j].attributes[2].value=="Output"){
-//	  	        			var obj1="{}";
-//	  	        			obj1 = stringToJson(obj);
-//	  	        			obj1.id = id;
-//	  	        			obj1.name = name;
-//	  	        			knowledgedrawRect(300,30*j,300,30,id,name);
-//	  	        			outputs.push(id+"."+name);
 	  	        			var safety={};
 	  	        			for(var k=0;k<safetyrelated[0].childNodes.length;k++){
 	  	        				if(safetyrelated[0].childNodes[k].nodeName=="Redundancy"){
@@ -409,20 +396,7 @@ function getfromoutput(){
 						
 					}
 					
-//					for(var ll=0;ll<ConceptList.data.length;ll++){
-//						if(ConceptList.data[ll]["@Name"]==stackarr[stackarr.length-1]){
-//							if(ConceptList.data[ll]["Safety"]["Redundancy"]<maxSafety){
-//								ConceptList.data[ll]["Safety"]["Redundancy"] = maxSafety;
-//								break;
-//							}		
-//						}
-//					}
-					
-//					System.out.println("stack:"+stack.get(j));
 				}
-//				for(int j=stack.size()-1;j>=0;j--){
-//					System.out.println("stack:"+stack.get(j));
-//				}
 			}
 			
 		}else{
@@ -469,25 +443,6 @@ function getfrominput(){
 						}
 //						var maxSecurity = 0;
 						for(var k=0;k<stackarr.length-2;k++){
-//							if(inputsecurity[stackarr[k]].redundancy>maxSecurity){
-//								maxSecurity = inputsecurity[stackarr[k]].redundancy;
-//							}
-//							var ll=0;
-//							for(ll=0;ll<ConceptList.data.length;ll++){
-//								if(ConceptList.data[ll]["@Name"]==stackarr[k]){
-//									if(highlevelConceptList[stackarr[k]]==null){
-//										highlevelConceptList[stackarr[k]] = ConceptList.data[ll];
-//									}
-//									if(highlevelConceptList[stackarr[k]]["property"]["Safety"][0]<maxSecurity){
-//										highlevelConceptList[stackarr[k]]["property"]["Safety"][0] = maxSecurity;
-//										break;
-//									}		
-//								}
-//								
-//							}
-//							if(ll==ConceptList.data.length){
-//								highlevelConceptList[stackarr[k]]==null;
-//							}
 							var ll=0;
 							for(ll=0;ll<ConceptList.data.length;ll++){
 								if((ConceptList.data[ll]["@ID"]+"."+ConceptList.data[ll]["@Name"])==stackarr[k]){
@@ -497,11 +452,6 @@ function getfrominput(){
 										highlevelConceptList[stackarr[k]]["property"]["Safety"][0] = maxSecurity;
 										highlevelConceptList[stackarr[k]]["property"]["Performance"]["RefreshRate"] = maxRealtime;
 									}
-//									highlevelConceptList.stackarr[k] = ConceptList.data[ll]; 
-//									if(highlevelConceptList[stackarr[k]]["property"]["Safety"][0]<maxSafety){
-//										highlevelConceptList[stackarr[k]]["property"]["Safety"][0] = maxSafety;
-//										break;
-//									}		
 								}
 							}
 							if(ll==ConceptList.data.length){
@@ -564,31 +514,7 @@ function getfrominput(){
 							links.push(link1);
 						
 					}
-//					var ll=0;
-//					for(ll=0;ll<ConceptList.data.length;ll++){
-//						if(ConceptList.data[ll]["@Name"]==stackarr[stackarr.length-1]){
-//							if(highlevelConceptList[stackarr[stackarr.length-1]]==null){
-//								highlevelConceptList[stackarr[stackarr.length-1]] = ConceptList.data[ll];
-//							}
-//							if(highlevelConceptList[stackarr[stackarr.length-1]]["property"]["Safety"][0]<maxSecurity){
-//								highlevelConceptList[stackarr[stackarr.length-1]]["property"]["Safety"][0] = maxSecurity;
-//								break;
-//							}		
-//						}
-//					}
-//					if(ll==ConceptList.data.length){
-//						highlevelConceptList[stackarr[stackarr.length-1]]==null;
-//					}
-//						Log("stack1:"+stack1[j]);
-//						System.out.println("stack:"+stack1.get(j));
-					}
-//					filterStrList(stack1);
-//					for(int j=0;j<stack.size();j++){
-//						System.out.println("stack:"+stack.get(j));
-//					}
-//					for(int j=stack.size()-1;j>=0;j--){
-//						System.out.println("stack:"+stack.get(j));
-//					}
+				}
 				}
 			}else{
 				Log("知识库中没有"+inputs[i]);

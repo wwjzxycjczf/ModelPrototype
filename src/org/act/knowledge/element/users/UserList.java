@@ -7,14 +7,10 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.act.knowledge.element.concepts.ConceptsList;
 import org.act.knowledge.element.relations.RelationsList;
-import org.act.knowledge.element.rules.Rule;
 import org.act.knowledge.element.rules.RuleList;
 import org.act.knowledge.element.textfield.WebSocketTextField;
 import org.jboss.netty.channel.Channel;
@@ -22,14 +18,6 @@ import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 
-import fmath.conversion.d.b.e;
-
-
-
-
-//import xservices.wsr.datacenter.element.netnode.NetNodeList;
-//import xservices.wsr.datacenter.element.station.Station;
-//import xservices.wsr.datacenter.element.textfield.WebSocketTextField;
 
 public class UserList {
 
@@ -47,15 +35,11 @@ private ChannelGroup channelgroup = null;	//组播组
 	private Object[] channelarrayorigin;
 	private final String userchatlistfilename = "userchatlist.txt";
 	private ArrayList<String> userchat;
-//	private List<String> usernames;
-//	private int usernum=0;
 	public UserList(WebSocketTextField websockettextfield){
 		channelgroup = new DefaultChannelGroup();
 		this.websockettextfield = websockettextfield;
 		userChannel = new HashMap<String,String>();
 		userchat = new ArrayList<String>(50);
-//		usernames = new ArrayList<String>();
-//		usernames = new String[10];
 	}
 	/** 将用户加入WebSocket列表 */
 	public synchronized void addUser(Channel channel) {
@@ -88,7 +72,6 @@ private ChannelGroup channelgroup = null;	//组播组
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-//				JOptionPane.showMessageDialog(null, "Userlist文件写入错误");
 				System.err.println("userchatlist文件写入错误");
 			} finally
 			{
@@ -136,33 +119,9 @@ private ChannelGroup channelgroup = null;	//组播组
 	public synchronized void addUsername(String username) throws FileNotFoundException, Exception {
 		String key = updateuserChannelMap(channelgroup,username);
 		if(key==""){ 
-//			Object[] channelarray = channelgroup.toArray();
-//			key =((Channel)channelarray[0]).getRemoteAddress().toString();
 			return;
 		}
-//		Object[] channelarray = channelgroup.toArray();
-//		String key =((Channel)channelarray[channelgroup.size()-1]).getRemoteAddress().toString(); 
 		userChannel.put(key, username);
-//		userChannel[key] = username;
-//		int i=0;
-//		for(i=0;i<usernum;i++){
-//			if(usernames.get(i).equals(username)){
-////				return;
-//				break;
-//			}
-//		}
-//		if(i==usernum){
-//			usernames.add(username);
-//			usernum++;
-////			usernames[usernum++] = username;
-//		}
-//		String users="";
-//		for(int j=0;j<usernum;j++){
-//			users+=usernames[j]+";";
-//		}
-//		String userstr ="{\"type\":\"user\",\n"+"\"name\":\""+users+"\"}";
-//		// 转发
-//		channelgroup.write(new TextWebSocketFrame(userstr));
 	}
 	public synchronized String updateuserChannelMap(ChannelGroup channelgroup,String username){
 		String key ="";
@@ -213,20 +172,6 @@ private ChannelGroup channelgroup = null;	//组播组
 						}else{
 							userChannel.remove(key1);
 						}
-						
-//						for(i=0;i<channelarray.length;i++){
-//							for(j=0;j<channelarrayorigin.length;j++){
-//								if(((Channel)channelarrayorigin[j]).getRemoteAddress().toString().equals(((Channel)channelarray[i]).getRemoteAddress().toString())){
-//									break;
-//								}
-//							}
-//							if(j==channelarrayorigin.length){
-//								key = ((Channel)channelarray[i]).getRemoteAddress().toString();
-//								break;
-//							}
-//						}
-						
-//						break;
 					}
 				}
 				for(i=0;i<channelarray.length;i++){
@@ -247,70 +192,6 @@ private ChannelGroup channelgroup = null;	//组播组
 		}
 		return key;
 	}
-		
-		
-//		if(userChannel.size()+1>channelarray.length){//删除用户并提醒
-////			String username = userChannel.get(((Channel)channelarray[channelarray.length-1]).getRemoteAddress().toString());
-////			String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username+"\"}";
-////			System.out.println(log+"loginout");
-////			channelgroup.write(new TextWebSocketFrame(log));
-////			websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
-////		}
-//						Iterator<String> it =userChannel.keySet().iterator();
-//////			Set<Entry<String, String>> set = userChannel.entrySet();
-//////			Iterator<Entry<String, String>> it = set.iterator();
-////						int i=0;
-//						String key = it.next();
-//						if(key!=((Channel)channelarray[0]).getRemoteAddress().toString()){
-//							String username = userChannel.get(key);
-//							String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username+"\"}";
-//							channelgroup.write(new TextWebSocketFrame(log));
-//							websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
-//							userChannel.remove(key);
-//							return ((Channel)channelarray[0]).getRemoteAddress().toString();
-////							
-//						}
-////			while(it.hasNext()){
-////				String key1  = it.next();
-////				if(((Channel)channelarray[channelarray.length-1-i]).getRemoteAddress().toString()!=key1){
-////					String username = userChannel.get(key1);
-////					String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username+"\"}";
-////					channelgroup.write(new TextWebSocketFrame(log));
-////					websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
-////					return ((Channel)channelarray[i]).getRemoteAddress().toString();
-//////					userChannel.remove(key1);
-////				}
-////				i++;
-//////				int j=0;
-//////				for(j=0;j<channelarray.length; ++j) {
-//////					String key =((Channel)channelarray[j]).getRemoteAddress().toString();
-//////					if(key.equals(key1)){
-//////						break;
-//////					}
-//////				}
-//////				if(j==channelarray.length){//没有me.getKey();
-//////					String username = userChannel.get(key1);
-//////					String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username+"\"}";
-//////					channelgroup.write(new TextWebSocketFrame(log));
-//////					websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
-//////					userChannel.remove(key1);
-//////				}
-////			}
-//		}
-//		return "";
-//			for(int i=0;i<userChannel.size();i++){
-//				String key1 = userChannel.
-//				for(int j=0;j<channelarray.length; ++j) {
-//					String key =((Channel)channelarray[i]).getRemoteAddress().toString();
-//					if(userChannel.containsKey(key)){
-//						break;
-//					}
-//				}
-//				String key =((Channel)channelarray[channelnum]).getRemoteAddress().toString();
-//				if(userChannel.)
-//			}
-//		}
-
 	
 	public synchronized void deleteUsername(String username) throws FileNotFoundException, Exception {
 		Iterator iter = userChannel.entrySet().iterator();
@@ -319,9 +200,6 @@ private ChannelGroup channelgroup = null;	//组播组
 			Object key = entry.getKey();
 			Object val = entry.getValue();
 			if(val.equals(username)){
-//				String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username1+"\"}";
-//				channelgroup.write(new TextWebSocketFrame(log));
-//				websockettextfield.setTxt_websocket(username1+"退出了\r\n\r\n");
 				userChannel.remove(key);
 				for(int i=0;i<channelgroup.toArray().length;i++){
 					if(((Channel)channelgroup.toArray()[i]).getRemoteAddress().toString().equals(key)){
@@ -329,29 +207,10 @@ private ChannelGroup channelgroup = null;	//组播组
 						channelarrayorigin =channelgroup.toArray();
 						break;
 					}
-//					System.out.println("channelid:"+((Channel)channelarrayorigin[i]).getId());
-//					System.out.println("channel:"+((Channel)channelarrayorigin[i]).getRemoteAddress().toString());
 				}
 				break;
 			}
 		}
-//		String username1 = userChannel.get(key1);
-//		if(username1.equals(username)){
-////			String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username1+"\"}";
-////			channelgroup.write(new TextWebSocketFrame(log));
-////			websockettextfield.setTxt_websocket(username1+"退出了\r\n\r\n");
-//			userChannel.remove(key1);
-//		}
-//		if(i==usernum){
-//			usernames[usernum++] = username;
-//		}
-//		String users="";
-//		for(int j=0;j<usernum;j++){
-//			users+=usernames[j]+";";
-//		}
-//		String userstr ="{\"type\":\"user\",\n"+"\"name\":\""+users+"\"}";
-//		// 转发
-//		channelgroup.write(new TextWebSocketFrame(userstr));
 	}
 	public synchronized String sendUsername(){
 		String users="";
@@ -361,22 +220,10 @@ private ChannelGroup channelgroup = null;	//组播组
 		    String key = (String)it.next(); // key
 		    users+=userChannel.get(key)+";"; // value
 		}
-//		for(int i=0;i<userChannel.size();i++){
-//			users+=userChannel.get(i)+";";
-//		}
-//		if(usernum==0)
-//			return "";
-//		
-//		for(int i=0;i<usernum;i++){
-//			users+=usernames.get(i)+";";
-//		}
 		users = users.substring(0,users.length()-1);
 		System.out.println(users+"ddddd");
 		String userstr ="{\"type\":\"user\",\n"+"\"name\":\""+users+"\"}";
-//		channelgroup.write(new TextWebSocketFrame(userstr));
 		return userstr;
-		// 转发
-//		channelgroup.write(new TextWebSocketFrame(userstr));
 	}
 	/** 向列表中的用户转发Json格式的Relation信息 
 	 * @throws Exception 
