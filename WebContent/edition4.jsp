@@ -91,7 +91,7 @@ stroke: #000 !important;
      <div id="mainframe">
      <div>
     <form id="form1">  
-        <div>  
+        <div>   
          	<input type='button' class='btn' value='Input knowledge' /> 
         	<input type="file" name="fileField" class="file1" id="fknowledge" size="28" /> 
         	<input type='button' class='btn' value='Input formula' /> 

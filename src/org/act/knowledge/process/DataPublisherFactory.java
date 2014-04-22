@@ -329,7 +329,7 @@ public class DataPublisherFactory {
 		}
 	}
 	public void saveChatinfo(ChannelHandlerContext ctx,String info) throws FileNotFoundException, Exception{
-		userlist.saveChatinfo(info);
+		userlist.saveChatinfo(info); 
 		websockettextfield.setTxt_websocket(info+"\r\n\r\n");
 	}
 	/** 增加WebSocket用户 */

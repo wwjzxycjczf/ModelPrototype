@@ -131,7 +131,7 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
 				((DataPublisherFactory) datapublisherfactory).saveChatinfo(ctx,request);
 			}
 			if(request.indexOf("highlevelreqStr")>=0){
-				String[] strarr = request.split(":");
+				String[] strarr = request.split(":"); 
 				((DataPublisherFactory) datapublisherfactory).AddHighlevelreq(ctx,strarr[1]);
 			}
 			if (request.equalsIgnoreCase("request_concept_list")) {

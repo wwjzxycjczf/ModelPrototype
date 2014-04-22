@@ -135,7 +135,7 @@ private ChannelGroup channelgroup = null;	//组播组
 	 */
 	public synchronized void addUsername(String username) throws FileNotFoundException, Exception {
 		String key = updateuserChannelMap(channelgroup,username);
-		if(key==""){
+		if(key==""){ 
 //			Object[] channelarray = channelgroup.toArray();
 //			key =((Channel)channelarray[0]).getRemoteAddress().toString();
 			return;

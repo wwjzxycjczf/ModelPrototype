@@ -1413,7 +1413,7 @@ function drawsvg21(nodes,links){
 //	      .on("dragstart", function() { this.parentNode.appendChild(this); })
 //	      .on("drag", dragmove))
 //	      ;
-
+ 
 	//  node.append("rect")
 //	      .attr("height", function(d) { return d.dy; })
 //	      .attr("width", sankey.nodeWidth())
