@@ -57,15 +57,14 @@ stroke: #000 !important;
     <script src="d3.geom.js"></script> 
       <script src="d3.layout.js"></script>  --> 
       <script src="sankey.js"></script>
-<script type="text/javascript"  src="drawsvgnew2.js"></script> 
 <!--<script src="d3.js"></script>-->
 
 
 
   
 </head>  
-<body>
-<div id="login" style="background: url(images/loginbkg.png);left:400px;top:200px;position:absolute;border:1px solid black;width:512px;height:398px;display:block">
+<body onload="onLoad()">
+<div id="login" style="background: url(images/loginbkg.png);left:400px;top:200px;position:absolute;border:1px solid black;width:512px;height:398px;display:none">
     <form id="form1" style="text-align:center;font-family:Courier New">
         <h1>登  录 </h1>
         <br />
@@ -79,7 +78,19 @@ stroke: #000 !important;
          <div id='tips' ></div>
         </form>
      </div>
-     <div id="mainframe" style="display:none">
+     <div id="InputBox" class="chat" style="display:none">
+       <h1>输入参数</h1>
+			<div id="parameterBox">
+    		</div>    
+    		<input type="submit" name="sendfangzhen" id="sendfangzhen" value="仿真"  style="margin-top:4px;margin-left:200px;" onclick="SendFZ();"  />
+			
+		<input type="submit" name="close" id="closefz" value="关闭"  style="margin-top:4px;margin-left:35px;" onclick="CloseFZ();"  />
+		
+			
+       
+       
+	</div>
+     <div id="mainframe" style="display:block">
      <div>
     <form id="form1">  
         <div>  
@@ -153,10 +164,16 @@ stroke: #000 !important;
 				<input type="text" name="Description" id="Description" value=""  class="p10" />				
 			</div>	
 			<div id="mathproperty" style="display:none">
-	
+			<h1>公式参数对应关系，如v->"C20.Altitude Rate"</h1>
+			<div id="mathproperty1">
+    		</div>    		
+			<div id="mathproperty2">
+			
     		</div>
-    		
-		
+    		<input type='button' style="border:1px solid #CDCDCD;height:24px;margin-right:20px;margin-top:0px; width:50px;" value='保存' onclick="ModifyRule()"/> 
+	     	<input type='button' style="border:1px solid #CDCDCD;height:24px;margin-right:20px;margin-top:10px;width:50px;" value='仿真' onclick="SimulateRule()"/> 
+			
+    		</div>
 		    </div>
 		 </div>
     </div>
@@ -188,8 +205,8 @@ stroke: #000 !important;
 <!-- <div id="content" style="width:600px;height:200px;position:absolute;border: 1px solid #eee;left:310px;margin-left:0px;top:600px;overflow:auto;"></div>
 -->
 
-<script type="text/javascript"  src="drawdomaincanvasnew4requirement.js"></script> 
-  <script type="text/javascript"  src="drawdomaincanvasnew4js.js"></script> 
+<script type="text/javascript"  src="mathmldesignrequirement.js"></script> 
+  <script type="text/javascript"  src="mathmldesign.js"></script> 
    <script type="text/javascript">
    
  

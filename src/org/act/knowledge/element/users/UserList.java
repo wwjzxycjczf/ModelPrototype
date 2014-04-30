@@ -5,7 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -30,15 +32,15 @@ private ChannelGroup channelgroup = null;	//组播组
 
 	private final String userlistfilename = "userlist.txt";
 
-
-	private HashMap<String,String> userChannel;
+	
+	private Hashtable<String, String> userChannel;
 	private Object[] channelarrayorigin;
 	private final String userchatlistfilename = "userchatlist.txt";
 	private ArrayList<String> userchat;
 	public UserList(WebSocketTextField websockettextfield){
 		channelgroup = new DefaultChannelGroup();
 		this.websockettextfield = websockettextfield;
-		userChannel = new HashMap<String,String>();
+		userChannel = new Hashtable<String,String>();
 		userchat = new ArrayList<String>(50);
 	}
 	/** 将用户加入WebSocket列表 */
@@ -194,11 +196,16 @@ private ChannelGroup channelgroup = null;	//组播组
 	}
 	
 	public synchronized void deleteUsername(String username) throws FileNotFoundException, Exception {
-		Iterator iter = userChannel.entrySet().iterator();
-		while(iter.hasNext()){
-			Map.Entry entry = (Map.Entry)iter.next();
-			Object key = entry.getKey();
-			Object val = entry.getValue();
+		Enumeration e = userChannel.keys();
+//		Iterator iter = userChannel.entrySet().iterator();
+//		while(iter.hasNext()){
+		while(e.hasMoreElements()){
+			Object key = e.nextElement();
+			Object val = userChannel.get(key);
+//			e.nextElement()
+//			Map.Entry entry = (Map.Entry)iter.next();
+//			Object key = entry.getKey();
+//			Object val = entry.getValue();
 			if(val.equals(username)){
 				userChannel.remove(key);
 				for(int i=0;i<channelgroup.toArray().length;i++){
@@ -214,10 +221,12 @@ private ChannelGroup channelgroup = null;	//组播组
 	}
 	public synchronized String sendUsername(){
 		String users="";
-		Iterator<String> it =userChannel.keySet().iterator();
-		while(it.hasNext())
+		Enumeration e = userChannel.keys();
+//		Iterator<String> it =userChannel.keySet().iterator();
+//		while(it.hasNext())
+		while(e.hasMoreElements())
 		{
-		    String key = (String)it.next(); // key
+		    String key = (String) e.nextElement();// key
 		    users+=userChannel.get(key)+";"; // value
 		}
 		users = users.substring(0,users.length()-1);

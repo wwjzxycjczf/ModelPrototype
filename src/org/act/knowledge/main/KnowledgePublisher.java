@@ -13,6 +13,7 @@ import org.act.knowledge.element.relations.RelationsList;
 import org.act.knowledge.element.rules.RuleList;
 import org.act.knowledge.element.textfield.WebSocketTextField;
 import org.act.knowledge.element.users.UserList;
+import org.act.knowledge.math.MathTransform;
 import org.act.knowledge.process.DataPublisherFactory;
 import org.act.knowledge.websocket.WebSocketServer;
 
@@ -27,6 +28,7 @@ public class KnowledgePublisher {
 	private ConceptsList conceptlist = null;// 知识概念列表
 	private RelationsList relationlist = null;// 知识关系列表
 	private RuleList rulelist = null;// 规则列表
+	private MathTransform mathtransform = null;//公式转换
 	
 //	private UserList userlist = null;//websocket用户列表
 	private LogList loglist = null;//用户消息记录
@@ -58,6 +60,7 @@ public class KnowledgePublisher {
 		relationlist = new RelationsList();
 		rulelist = new RuleList();
 		loglist = new LogList(websockettextfield);
+		mathtransform = new MathTransform();
 //		graphjson = new GraphJson();
 		
 		datapublisherfactory = new DataPublisherFactory(
@@ -67,7 +70,8 @@ public class KnowledgePublisher {
 				rulelist,	// 站点信息日志
 				loglist,	//消息列表
 //				graphjson,
-				websockettextfield	// WebSocket状态栏
+				websockettextfield,// WebSocket状态栏
+				mathtransform
 		);
 
 

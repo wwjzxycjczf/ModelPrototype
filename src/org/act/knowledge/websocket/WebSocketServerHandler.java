@@ -122,7 +122,10 @@ public class WebSocketServerHandler extends SimpleChannelUpstreamHandler {
 				// 发送站点列表
 				((DataPublisherFactory) datapublisherfactory).sendUserlist(ctx,request.substring(0,request.indexOf(":")),request.substring(request.indexOf(":")+1));
 			}
-			
+			if(request.indexOf("FZ:")>=0){//仿真
+				
+				((DataPublisherFactory) datapublisherfactory).sendFZData(ctx,request.substring(3));
+			}
 			if (request.indexOf("logout")>=0) {
 				// 发送站点列表
 				((DataPublisherFactory) datapublisherfactory).sendUserlist(ctx,request.substring(0,request.indexOf(":")),request.substring(request.indexOf(":")+1));

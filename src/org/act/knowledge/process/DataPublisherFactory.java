@@ -13,6 +13,7 @@ import org.act.knowledge.element.relations.RelationsList;
 import org.act.knowledge.element.rules.RuleList;
 import org.act.knowledge.element.textfield.WebSocketTextField;
 import org.act.knowledge.element.users.UserList;
+import org.act.knowledge.math.MathTransform;
 import org.dom4j.DocumentException;
 import org.jboss.netty.channel.Channel;
 import org.jboss.netty.channel.ChannelHandlerContext;
@@ -29,6 +30,7 @@ public class DataPublisherFactory {
 	private RuleList rulelist = null;// 规则列表
 	private HighLevelReq highlevelreq = new HighLevelReq();// 高层需求
 	private WebSocketTextField websockettextfield= null;	// WebSocket状态栏
+	private MathTransform mathtransform = null;//变换math数学公式
 	
 	private LogList loglist = null;//消息列表
 	public DataPublisherFactory(UserList userlist,				// WebSocket用户列表
@@ -38,7 +40,8 @@ public class DataPublisherFactory {
 			LogList loglist,//消息列表
 			
 //			GraphJson graphjson,
-			WebSocketTextField websockettextfield// WebSocket状态栏
+			WebSocketTextField websockettextfield,// WebSocket状态栏
+			MathTransform mathtransform
 			) 
 	{
 		
@@ -49,6 +52,7 @@ public class DataPublisherFactory {
 		this.setLoglist(loglist);//消息记录日志
 //		this.setGraphjson(graphjson);
 		this.websockettextfield = websockettextfield;	// WebSocket状态栏
+		this.mathtransform = mathtransform;
 	}
 	
 	
@@ -325,6 +329,13 @@ public class DataPublisherFactory {
 			String log = "{\"type\":\"singleuserout\",\n"+"\"name\":\""+username+"\"}";
 			userlist.transforlog(log);
 			websockettextfield.setTxt_websocket(username+"退出了\r\n\r\n");
+		}
+	}
+	
+	public void sendFZData(ChannelHandlerContext ctx,String jsonstring){
+		if(ctx != null)
+		{
+			mathtransform.JsonstringToJson(jsonstring);
 		}
 	}
 	public void saveChatinfo(ChannelHandlerContext ctx,String info) throws FileNotFoundException, Exception{
