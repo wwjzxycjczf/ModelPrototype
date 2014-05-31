@@ -83,7 +83,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
   }  finally{ 
 	   try { 
 		      if(stmt != null) 
-		    	  stmt.close(); 
+		    	  stmt.close();    
 		      if(conn!=null && !conn.isClosed()) 
 		    	  conn.close(); 
 		   }catch (final SQLException e) { 

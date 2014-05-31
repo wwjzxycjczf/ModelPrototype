@@ -20,7 +20,14 @@ import net.sf.json.JSONObject;
 public class MathTransform {
 //	private static String mathfile = "D:\\Program Files\\apache-tomcat-7.0.32\\webapps\\ModelPrototype\\resources\\knowledge graph1\\rules\\6.xml";
 
-	public MathTransform(){
+	private static KernelLink ml = null;
+//	 ExecuteCMD excmd = new ExecuteCMD();
+//	 MathLink ml1 = null;
+	 private static String jLinkDir = "D:\\Program Files\\Wolfram Research\\Mathematica\\9.0\\SystemFiles\\Links\\JLink";
+	 
+	public MathTransform() throws MathLinkException{
+		System.setProperty("com.wolfram.jlink.libdir", jLinkDir);
+		
 //		rulelist  = Collections.synchronizedList(new ArrayList<Rule>());
 	}
 //	private static JSONObject jsonobj;
@@ -30,6 +37,7 @@ public class MathTransform {
 		ArrayList<String> mathnumarr = new ArrayList<String>();
 		HashMap<String,Object> mathmap = new HashMap<String,Object>();
 		ArrayList<String> codearr = new ArrayList<String>();
+		String[] parameterarr;
 		if(jsonobj.has("objectstr")){
 			String objectstr = jsonobj.getString("objectstr");
 			while(objectstr.indexOf('$')!=-1){
@@ -42,7 +50,7 @@ public class MathTransform {
 		}
 		if(jsonobj.has("ruleobject")){
 			JSONObject ruleobject = jsonobj.getJSONObject("ruleobject");
-			for(int i=0;i<mathnumarr.size();i++){
+			for(int i=0;i<mathnumarr.size();i++){  
 				if(ruleobject.has(mathnumarr.get(i))){
 					mathmap.put(mathnumarr.get(i), ruleobject.getJSONObject(mathnumarr.get(i)));
 										
@@ -52,18 +60,15 @@ public class MathTransform {
 		}
 		if(jsonobj.has("parameterstr")){
 			String parameterstr = jsonobj.getString("parameterstr");
-//			JSONObject parameterstr = jsonobj.getJSONObject("parameterstr");
+			parameterarr = parameterstr.split(";");//格式如matrix:3
 			
 		}
-		 KernelLink ml = null;
-		 ExecuteCMD excmd = new ExecuteCMD();
-		 MathLink ml1 = null;
-		 String jLinkDir = "D:\\Program Files\\Wolfram Research\\Mathematica\\9.0\\SystemFiles\\Links\\JLink";
-		 System.setProperty("com.wolfram.jlink.libdir", jLinkDir);
 
 		 try { 
-		  ml = MathLinkFactory.createKernelLink("-linkmode launch -linkname 'D:\\Program Files\\Wolfram Research\\Mathematica\\9.0\\MathKernel.exe'");
-		  ml.discardAnswer();
+			 if(ml == null){
+				 ml = MathLinkFactory.createKernelLink("-linkmode launch -linkname 'D:\\Program Files\\Wolfram Research\\Mathematica\\9.0\\MathKernel.exe'");
+				 ml.discardAnswer();
+			 }
 		  Iterator iter = mathmap.keySet().iterator(); 
 		  while (iter.hasNext()) { 
 		      Object key = iter.next(); 
@@ -73,16 +78,14 @@ public class MathTransform {
 		    	  mathstr = val.getString("rulestr");
 		    	  System.out.println("mathstr:"+mathstr);
 		    	  String latex = ConvertFromMathMLToLatex.convertToLatex(mathstr);
-					System.out.print("latex:"+latex);
+					System.out.println("latex:"+latex);
 					latex.replaceAll(",", "");
 					ml.putFunction("EnterTextPacket", 1);
-					  ml.put("CForm[ToExpression[\""+latex+"\", TeXForm]]");
-//						ml.put("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
-//						ml.put("CForm[ToExpression[Import[\""+mathfile1+"\",\"MathML\"]]]");
-						  ml.waitForAnswer();
-						  String output = ml.getString();
-						  System.out.println(output);
-						  ml.discardAnswer();
+					ml.put("CForm[ToExpression[\""+latex+"\", TeXForm]]");
+					ml.waitForAnswer();
+					String output = ml.getString();
+					System.out.println(output);
+					ml.discardAnswer();
 		      }
 		      
 		  } 

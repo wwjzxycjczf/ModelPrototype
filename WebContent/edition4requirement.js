@@ -253,10 +253,72 @@ function infer(){
 	document.getElementsByTagName("svg").item(0).style.display="block";
 //	Log(jsonToString(nodes));
 //	Log(jsonToString(links));
-	drawsvg21(nodes,links);
 	Log("Consistency and Accuracy Verification: High-level requirements are unambiguous and can describe system requirements accurately. We get the same result when given the same system requirements.");
 	Log("Traceability Verification: System requirements are transferred into high-level requirements step by step from the graphic display.");
 	filterStrList(stacks);
+	for(var i=0;i<stacks.length;i++){
+		Log(stacks[i]);
+		var stackss = stacks[i].substring(1,stacks[i].length-1);
+		var stackarr = stackss.split(",");
+		for(var k=0;k<stackarr.length-2;k++){
+		var link = {};
+		var link1 = {};
+		var node = {};
+		node.name = stackarr[k];
+		node.reflexive = false;
+		var l=0;
+		for(l=0;l<nodes.length;l++){
+			if(nodes[l].name==node.name){
+				link.source = nodes[l];
+				break;
+			}
+		}
+		if(l==nodes.length){
+			nodes.push(node);
+			link.source = node;
+		}
+		
+		var node1 = {};
+		node1.name = stackarr[stackarr.length-2];
+		node1.reflexive = false;
+		for(l=0;l<nodes.length;l++){
+			if(nodes[l].name==node1.name){
+				link.target = nodes[l];
+				link1.source = nodes[l];
+				break;
+			}
+		}
+		if(l==nodes.length){
+			nodes.push(node1);
+			link.target = node1;
+			link1.source = node1;
+		}
+		link.left = false;
+		link.right = true;
+		link.value = 20;
+		links.push(link);
+		
+		
+		var node2 = {};
+		node2.name = stackarr[stackarr.length-1];
+		node2.reflexive = false;
+		for(l=0;l<nodes.length;l++){
+			if(nodes[l].name==node2.name){
+				link1.target = nodes[l];
+				break;
+			}
+		}
+		if(l==nodes.length){
+			nodes.push(node2);
+			link1.target = node2;
+		}
+		link1.left = false;
+		link1.right = true;
+		link1.value = 20;
+		links.push(link1);
+		}
+	}
+	drawsvg21(nodes,links);
 	var highlevelreqStr = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"+"\n<formulas>";
 	for(var i=0;i<stacks.length;i++){
 		var stackss = stacks[i].substring(1,stacks[i].length-1);
@@ -338,61 +400,6 @@ function getfromoutput(){
 							highlevelConceptList[stackarr[k]]==null;
 						}
 						
-						var link = {};
-						var link1 = {};
-						var node = {};
-						node.name = stackarr[k];
-						node.reflexive = false;
-						var l=0;
-						for(l=0;l<nodes.length;l++){
-							if(nodes[l].name==node.name){
-								link.source = nodes[l];
-								break;
-							}
-						}
-						if(l==nodes.length){
-							nodes.push(node);
-							link.source = node;
-						}
-						
-						var node1 = {};
-						node1.name = stackarr[stackarr.length-2];
-						node1.reflexive = false;
-						for(l=0;l<nodes.length;l++){
-							if(nodes[l].name==node1.name){
-								link.target = nodes[l];
-								link1.source = nodes[l];
-								break;
-							}
-						}
-						if(l==nodes.length){
-							nodes.push(node1);
-							link.target = node1;
-							link1.source = node1;
-						}
-						link.left = false;
-						link.right = true;
-						link.value = 20;
-						links.push(link);
-						
-						
-						var node2 = {};
-						node2.name = stackarr[stackarr.length-1];
-						node2.reflexive = false;
-						for(l=0;l<nodes.length;l++){
-							if(nodes[l].name==node2.name){
-								link1.target = nodes[l];
-								break;
-							}
-						}
-						if(l==nodes.length){
-							nodes.push(node2);
-							link1.target = node2;
-						}
-						link1.left = false;
-						link1.right = true;
-						link1.value = 20;
-						links.push(link1);
 						
 					}
 					
@@ -457,61 +464,6 @@ function getfrominput(){
 							if(ll==ConceptList.data.length){
 								highlevelConceptList[stackarr[k]]==null;
 							}
-							var link = {};
-							var link1 = {};
-							var node = {};
-							node.name = stackarr[k];
-							node.reflexive = false;
-							var l=0;
-							for(l=0;l<nodes.length;l++){
-								if(nodes[l].name==node.name){
-									link.source = nodes[l];
-									break;
-								}
-							}
-							if(l==nodes.length){
-								nodes.push(node);
-								link.source = node;
-							}
-							
-							var node1 = {};
-							node1.name = stackarr[stackarr.length-2];
-							node1.reflexive = false;
-							for(l=0;l<nodes.length;l++){
-								if(nodes[l].name==node1.name){
-									link.target = nodes[l];
-									link1.source = nodes[l];
-									break;
-								}
-							}
-							if(l==nodes.length){
-								nodes.push(node1);
-								link.target = node1;
-								link1.source = node1;
-							}
-							link.left = false;
-							link.right = true;
-							link.value = 20;
-							links.push(link);
-							
-							
-							var node2 = {};
-							node2.name = stackarr[stackarr.length-1];
-							node2.reflexive = false;
-							for(l=0;l<nodes.length;l++){
-								if(nodes[l].name==node2.name){
-									link1.target = nodes[l];
-									break;
-								}
-							}
-							if(l==nodes.length){
-								nodes.push(node2);
-								link1.target = node2;
-							}
-							link1.left = false;
-							link1.right = true;
-							link1.value = 20;
-							links.push(link1);
 						
 					}
 				}
@@ -527,13 +479,14 @@ function getfrominput(){
 }
 function judge(dep,arr,stack){
 	var i=0;
-	var bool=false;
-	var bool1 = false;
+	
 	for(i=0;i<arr.length;i++){
-		var stackstr = "{";
+	var stackstr = "{";
 		var arr1 = arr[i];
 		var j;
 		var newarr=[];
+		var bool=false;
+		var bool1 = false;
 		for(j=0;j<arr1.length-1;j++){//arr1.length-1是公式name
 			var o = mapVariable[arr1[j]];
 			if(o==null||o.length==0){
@@ -546,7 +499,7 @@ function judge(dep,arr,stack){
 			for(j=0;j<arr1.length-1;j++){
 				var k;
 				for(k=0;k<inputs.length;){
-					if(inputs[k]==arr1[j]||inputs[k]==(arr1[j]+" Input")||inputs[k]==(arr1[j]+" Data Input")){
+					if(inputs[k].substring(inputs[k].indexOf("."))==arr1[j].substring(arr1[j].indexOf("."))||inputs[k].substring(inputs[k].indexOf("."))==(arr1[j].substring(arr1[j].indexOf("."))+" Input")||inputs[k].substring(inputs[k].indexOf("."))==(arr1[j].substring(arr1[j].indexOf("."))+" Data Input")){
 						inputnum[inputs[k]] = 1;
 						if(inputsecurity[inputs[k]].redundancy>maxSecurity){
 							maxSecurity = inputsecurity[inputs[k]].redundancy;
@@ -562,7 +515,9 @@ function judge(dep,arr,stack){
 				if(k==inputs.length){//给定的输入中没有最初输入,此条路径断了。
 					Log("给定输入中缺少初始输入"+arr1[j]);
 					maxSecurity = 0;
-					continue;
+					break;
+					
+//					continue;
 				}else{
 					
 					stackstr+= arr1[j]+",";
@@ -579,10 +534,12 @@ function judge(dep,arr,stack){
 			}
 		}else if(bool&&bool1){//有最初输入和中间
 			for(j=0;j<arr1.length-1;j++){
-				if(mapVariable[arr1[j]]==null){//为最初输入
+				if(mapVariable[arr1[j]]==null||mapVariable[arr1[j]].length==0){//为最初输入
 					var k;
 					for(k=0;k<inputs.length;){
-						if(inputs[k]==arr1[j]||inputs[k]==(arr1[j]+" Input")||inputs[k]==(arr1[j]+" Data Input")){
+						if(inputs[k].substring(inputs[k].indexOf("."))==arr1[j].substring(arr1[j].indexOf("."))||inputs[k].substring(inputs[k].indexOf("."))==(arr1[j].substring(arr1[j].indexOf("."))+" Input")||inputs[k].substring(inputs[k].indexOf("."))==(arr1[j].substring(arr1[j].indexOf("."))+" Data Input")){
+
+//						if(inputs[k]==arr1[j]||inputs[k]==(arr1[j]+" Input")||inputs[k]==(arr1[j]+" Data Input")){
 							inputnum[inputs[k]] = 1;
 							if(inputsecurity[inputs[k]].redundancy>maxSecurity){
 								maxSecurity = inputsecurity[inputs[k]].redundancy;
@@ -598,7 +555,9 @@ function judge(dep,arr,stack){
 					if(k==inputs.length){//给定的输入中没有最初输入,此条路径断了。
 						Log("给定输入中缺少初始输入"+arr1[j]);
 						maxSecurity = 0;
-						continue;
+						break;
+//						continue;
+
 					}else{
 						stackstr+=arr1[j]+",";
 					}
@@ -613,9 +572,9 @@ function judge(dep,arr,stack){
 				stackstr+=dep+"}";
 //				Log("stackstr:"+stackstr);
 				stack.push(stackstr);
-			}
-			for(j=0;j<newarr.length;j++){
-				judge(newarr[j],mapVariable[newarr[j]],stack);	
+				for(j=0;j<newarr.length;j++){
+					judge(newarr[j],mapVariable[newarr[j]],stack);	
+				}
 			}
 		}else{//均为中间
 			for(var ll=0;ll<arr1.length-1;ll++){
@@ -657,7 +616,7 @@ function judge1(dep,arr,stack){
 						var stack1 = [];
 						judge(arr2[l],o,stack1);
 						if(over==false){
-							Log(arr2[l]+"不能有给定输入生成");
+							Log(arr2[l]+"不能由给定输入生成");
 							break;
 						}else{
 							existstr.push(arr2[l]);
@@ -697,7 +656,8 @@ function exist(s,list){//判断s是否在list中
 }
 function existinputs(s,list){
 	for(var i=0;i<list.length;i++){
-		if(list[i]==s||list[i]==(s+" Input")||list[i]==(s+" Data Input")){
+	if(list[i].substring(list[i].indexOf("."))==s.substring(s.indexOf("."))||list[i].substring(list[i].indexOf("."))==(s.substring(s.indexOf("."))+" Input")||list[i].substring(list[i].indexOf("."))==(s.substring(s.indexOf("."))+" Data Input")){
+//		if(list[i]==s||list[i]==(s+" Input")||list[i]==(s+" Data Input")){
 			if(inputsecurity[list[i]].redundancy>maxSecurity){
 				maxSecurity = inputsecurity[list[i]].redundancy;
 			}

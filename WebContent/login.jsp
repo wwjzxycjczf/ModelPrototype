@@ -5,7 +5,7 @@
  <META HTTP-EQUIV= "pragma " CONTENT= "no-cache "> 
 <META HTTP-EQUIV= "Cache-Control " CONTENT= "no-cache, must-revalidate "> 
 <META HTTP-EQUIV= "expires " CONTENT= "Wed, 26 Feb 1997 08:21:57 GMT "> 
-  <title>雷达组网资源管理平台</title>
+  <title></title>
 
 <link rel="stylesheet" type="text/css" href="css/style.css" />
  </head>

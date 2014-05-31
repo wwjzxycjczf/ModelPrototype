@@ -122,7 +122,7 @@ protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 					PrintStream pstream = new PrintStream(new FileOutputStream(saveDir+"5.xml"));  
 					pstream.println(mathml);// 往文件里写入字符串  
 					
-					
+					System.out.println(mathml);
 	
 					PrintWriter writer = response.getWriter(); 
 				

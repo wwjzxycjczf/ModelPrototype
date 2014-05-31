@@ -17,6 +17,8 @@ import org.act.knowledge.math.MathTransform;
 import org.act.knowledge.process.DataPublisherFactory;
 import org.act.knowledge.websocket.WebSocketServer;
 
+import com.wolfram.jlink.MathLinkException;
+
 
 
 
@@ -50,8 +52,9 @@ public class KnowledgePublisher {
 		this.txt_websocketnumber = txt_websocketnumber;
 	}
 	/** 启动连接 
-	 * @throws IOException */
-	public void processStart(String ip, int websocketport) throws IOException {
+	 * @throws IOException 
+	 * @throws MathLinkException */
+	public void processStart(String ip, int websocketport) throws IOException, MathLinkException {
 		
 		websockettextfield = new WebSocketTextField(txt_websocket, txt_websocketnumber);// WebSocket状态栏
 		

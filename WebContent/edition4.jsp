@@ -61,7 +61,6 @@ stroke: #000 !important;
       <script type="text/javascript"  src="ajaxfileupload.js"></script>
       
       <script src="sankey.js"></script>
-<script type="text/javascript"  src="drawsvgnew2.js"></script> 
 
 
   
@@ -88,6 +87,18 @@ stroke: #000 !important;
        
        
 </div>
+<div id="InputBox" class="chat" style="display:none">
+       <h1>输入参数</h1>
+			<div id="parameterBox">
+    		</div>    
+    		<input type="submit" name="sendfangzhen" id="sendfangzhen" value="仿真"  style="margin-top:4px;margin-left:200px;" onclick="SendFZ();"  />
+			
+		<input type="submit" name="close" id="closefz" value="关闭"  style="margin-top:4px;margin-left:35px;" onclick="CloseFZ();"  />
+		
+			
+       
+       
+	</div>
      <div id="mainframe">
      <div>
     <form id="form1">  
@@ -167,7 +178,15 @@ stroke: #000 !important;
 				<input type="text" name="Description" id="Description" value=""  class="p10" />				
 			</div>	
 			<div id="mathproperty" style="display:none">
-	
+			<h1>公式参数对应关系，如v->"C20.Altitude Rate"</h1>
+			<div id="mathproperty1">
+    		</div>    		
+			<div id="mathproperty2">
+			
+    		</div>
+    		<input type='button' style="border:1px solid #CDCDCD;height:24px;margin-right:20px;margin-top:0px; width:50px;" value='保存' onclick="ModifyRule()"/> 
+	     	<input type='button' style="border:1px solid #CDCDCD;height:24px;margin-right:20px;margin-top:10px;width:50px;" value='仿真' onclick="SimulateRule()"/> 
+			
     		</div>
     		
 		

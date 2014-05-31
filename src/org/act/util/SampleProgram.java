@@ -3,6 +3,8 @@ import com.wolfram.jlink.*;
 
 public class SampleProgram {
 
+	private static String mathfile1 = "D:\\6.xml";
+	private static String mathfile = "D:\\Program Files\\apache-tomcat-7.0.32\\webapps\\ModelPrototype\\resources\\knowledge graph1\\rules\\6.xml";
 	public static void main(String[] args) throws InterruptedException {
 
 		 KernelLink ml = null;
@@ -14,11 +16,33 @@ public class SampleProgram {
 		 try { 
 		  ml = MathLinkFactory.createKernelLink("-linkmode launch -linkname 'D:\\Program Files\\Wolfram Research\\Mathematica\\9.0\\MathKernel.exe'");
 		  ml.discardAnswer();
+//		  ml.putFunction("EnterTextPacket", 1);
+//	  ml.put("CForm[ToExpression[\"v=3t\", TeXForm]]");
+////		ml.put("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
+////		ml.put("CForm[ToExpression[Import[\""+mathfile1+"\",\"MathML\"]]]");
+//		  ml.waitForAnswer();
+//		  String output = ml.getString();
+//		  System.out.println(output);
+//		  ml.discardAnswer();
 		  ml.putFunction("EnterTextPacket", 1);
-			ml.put("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
+//		  ml.put("CForm[ToExpression[\"s=\frac{1}{2}vt\", TeXForm]]");
+		  ml.put("CForm[ToExpression[\"\\frac{dH}{dt}= v \\sin (\\gamma ) \", TeXForm]]");
+//			ml.put("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
+//			ml.put("CForm[ToExpression[Import[\""+mathfile1+"\",\"MathML\"]]]");
 			  ml.waitForAnswer();
-			  String output = ml.getString();
+			String output = ml.getString();
 			  System.out.println(output);
+			
+			  
+			 
+//			  ml.putFunction("EnterTextPacket", 1);
+	
+//			  String inputstr = "Export[\"d:\\3.gif\",Plot[ToExpression[Import[\""+mathfile+"\",\"MathML\"]],{X,-10,10},PlotStyle->{RGBColor[1,0,0]}]]";
+//			//  inputstr = "Plot[x*Sin[x], {x, -10, 10}, PlotStyle -> {RGBColor[1, 0, 0]}]";
+//			  ml.put(inputstr);
+//			  ml.waitForAnswer();
+////			  String output1 = ml.getString();
+//			  System.out.println("ok");
 //		  excmd.setLink(ml);
 //		  excmd.setCmd("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
 //		  excmd.excute();

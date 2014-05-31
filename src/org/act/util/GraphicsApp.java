@@ -79,7 +79,7 @@ public class GraphicsApp extends Frame {
 	class BnAdptr implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			mathCanvas.setImageType(graphicsButton.getState() ? MathCanvas.GRAPHICS : MathCanvas.TYPESET);
-			mathCanvas.setMathCommand("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
+//			mathCanvas.setMathCommand("CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]");
 //			try {
 //				ml.waitForAnswer();
 //			} catch (MathLinkException e1) {
@@ -93,7 +93,7 @@ public class GraphicsApp extends Frame {
 //				// TODO Auto-generated catch block
 //				e1.printStackTrace();
 //			}
-//			mathCanvas.setMathCommand(inputTextArea.getText());
+			mathCanvas.setMathCommand(inputTextArea.getText());
 		}
 	}
 

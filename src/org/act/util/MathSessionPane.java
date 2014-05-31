@@ -1659,14 +1659,14 @@ class MathSessionTextPane extends JTextPane {
 			EvalInput = s;
 		}
 		String getEvalInput() {
-//			try {
-				return "CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]";
+			try {
+//				return "CForm[ToExpression[Import[\"d:\\1.mml\",\"MathML\"]]]";
 //				EvalInput;
-//				return getText(firstEditPos, getLength() - firstEditPos);
-//			} catch (BadLocationException e) {
-//				e.printStackTrace();
-//				return "";
-//			}
+				return getText(firstEditPos, getLength() - firstEditPos);
+			} catch (BadLocationException e) {
+				e.printStackTrace();
+				return "";
+			}
 		}
 
 		// This is a relatively expensive operation. Actually determining the
